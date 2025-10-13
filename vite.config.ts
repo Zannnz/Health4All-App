@@ -8,30 +8,32 @@ export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
+    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined
       ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-          await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner(),
-          ),
+          // cartographer/dev-banner only on Replit dev environment
+          await import("@replit/vite-plugin-cartographer").then((m) => m.cartographer()),
+          await import("@replit/vite-plugin-dev-banner").then((m) => m.devBanner()),
         ]
       : []),
   ],
   resolve: {
     alias: {
-      "@": path.resolve("client/src"),
-      "@shared": path.resolve("shared"),
-      "@assets": path.resolve("attached_assets"),
+      // use absolute resolves from project root
+      "@": path.resolve(process.cwd(), "client", "src"),
+      "@shared": path.resolve(process.cwd(), "shared"),
+      "@assets": path.resolve(process.cwd(), "attached_assets"),
     },
   },
-  root: "client",                  // relative path
+
+  // frontend root is client folder
+  root: "client",
+
+  // write the built frontend into project-root/dist/public
   build: {
-    outDir: "dist",                // relative path for Vercel
+    outDir: path.resolve(process.cwd(), "dist", "public"),
     emptyOutDir: true,
   },
+
   server: {
     fs: {
       strict: true,
