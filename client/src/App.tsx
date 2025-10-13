@@ -30,21 +30,21 @@ function Router() {
   if (!isAuthenticated) {
     return (
       <Switch>
-        <Route path="/" component={Landing} />
-        <Route component={NotFound} />
+        <Route path="/" element={<Landing />} />
+        <Route element={<NotFound />} />
       </Switch>
     );
   }
 
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
-      <Route path="/profile" component={FitnessProfile} />
-      <Route path="/workouts" component={Workouts} />
-      <Route path="/health" component={Health} />
-      <Route path="/hiking" component={Hiking} />
-      <Route path="/progress" component={Progress} />
-      <Route component={NotFound} />
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/profile" element={<FitnessProfile />} />
+      <Route path="/workouts" element={<Workouts />} />
+      <Route path="/health" element={<Health />} />
+      <Route path="/hiking" element={<Hiking />} />
+      <Route path="/progress" element={<Progress />} />
+      <Route element={<NotFound />} />
     </Switch>
   );
 }
