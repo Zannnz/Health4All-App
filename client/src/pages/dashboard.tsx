@@ -9,17 +9,20 @@ import type { HealthMetric, Workout, HikingSession } from "@shared/schema";
 export default function Dashboard() {
   const { user } = useAuth();
 
-  const { data: todayMetrics } = useQuery<HealthMetric[]>({
-    queryKey: ["/api/health-metrics/today"],
-  });
+const { data: todayMetrics } = useQuery<HealthMetric[]>({
+  queryKey: ["/api/health-metrics/today"],
+  queryFn: () => fetch("/api/health-metrics/today").then(res => res.json()),
+});
 
-  const { data: upcomingWorkouts } = useQuery<Workout[]>({
-    queryKey: ["/api/workouts/upcoming"],
-  });
+const { data: upcomingWorkouts } = useQuery<Workout[]>({
+  queryKey: ["/api/workouts/upcoming"],
+  queryFn: () => fetch("/api/workouts/upcoming").then(res => res.json()),
+});
 
-  const { data: recentHikes } = useQuery<HikingSession[]>({
-    queryKey: ["/api/hiking/recent"],
-  });
+const { data: recentHikes } = useQuery<HikingSession[]>({
+  queryKey: ["/api/hiking/recent"],
+  queryFn: () => fetch("/api/hiking/recent").then(res => res.json()),
+});
 
   const todayData = todayMetrics?.[0];
   const steps = todayData?.steps || 0;
