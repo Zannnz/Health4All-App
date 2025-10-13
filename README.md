@@ -84,14 +84,4 @@ For a more complete listing, check the `src/` and `public/` folders after extrac
 
 ---
 
-## Notes before publishing to GitHub
-- The packaged zip is cleaned of any embedded `.git/` history to avoid nested git issues. You can upload the contents directly to a new GitHub repo or clone the repo locally and push.
-- If you want me to push to GitHub, I cannot push from this environment — but I can prepare everything and give you precise push commands.
-
----
-
-If you'd like, I can also:
-- Add screenshots placeholders, badges, or a more-detailed Features section.
-- Generate a sample `.env.example` and add instructions for migrations.
-- Create a `CONTRIBUTING.md` or `LICENSE` file.
 
